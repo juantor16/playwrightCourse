@@ -11,7 +11,9 @@ export default class HomePage {
     readonly contactUsButton: Locator;
     readonly productsButton: Locator;
     readonly cartButton: Locator;
- 
+    readonly womenCategoryLink: Locator;
+    readonly dressCategoryLink: Locator;
+
     constructor(page: Page) {
         this.page = page;
         this.signUpAndLoginButton = page.getByRole('link', { name: 'Signup / Login' });
@@ -22,6 +24,9 @@ export default class HomePage {
         this.contactUsButton = page.getByRole('link', { name: 'Contact us' })
         this.productsButton = page.getByRole('link', { name: 'Products' })
         this.cartButton = page.getByRole('link', { name: 'Cart' })
+        this.womenCategoryLink = page.getByRole('link',{name: 'Women'});
+        this.dressCategoryLink = page.getByRole('link',{name: 'Dress'});
+
     }
 
     async visit() {
