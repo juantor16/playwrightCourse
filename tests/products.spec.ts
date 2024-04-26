@@ -2,15 +2,18 @@ import { test, expect } from '@playwright/test';
 import Utils from '../commons/Utils'
 import ProductsPage from '../pages/productsPage';
 import ProductDetailsPage from '../pages/productDetailsPAge';
+import HomePage from '../pages/HomePage';
 
 let utils: Utils;
 let productsPage: ProductsPage;
 let productDetailsPage: ProductDetailsPage;
+let homePage: HomePage;
 
 test.beforeEach(async ({ page }) => {
   utils = new Utils(page);
   productsPage = new ProductsPage(page);
   productDetailsPage = new ProductDetailsPage(page);
+  homePage = new HomePage(page);
   await productsPage.visit()
 });
 
@@ -48,3 +51,9 @@ test.skip('C9 - verificar que la funcionalidade de busqueda devuelve resultados 
   }
 })
 
+test('C18 - verificar categorias de los productos',async ({page})=>{
+  await homePage.womenCategoryLink.click({force:true})
+  await homePage.dressCategoryLink.click()
+  await productsPage.closeAd()
+  await utils.checkTextIsVisible('Women - dress Products');
+})
