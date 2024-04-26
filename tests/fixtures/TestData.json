@@ -1,0 +1,54 @@
+{
+    "usuarioNuevo": {
+        "prefix": "Mr.",
+        "firstName": "John",
+        "lastName": "Doe",
+        "fullName": "John Doe",
+        "emailAddress": "IamJohnDoe",
+        "emailDomain": "@example.com",
+        "password": "123456",
+        "DOB": {
+            "day": "10",
+            "month": "10",
+            "year": "1990"
+        },
+        "companyName": "Some Company",
+        "address": "123 SomeStreet",
+        "address2": "Apt 123",
+        "country": "Canada",
+        "state": "Quebec",
+        "city": "Montreal",
+        "zipCode": "12345",
+        "phoneNumber": "1234567890"
+    },
+    "usuarioCreado": {
+        "userName": "UsuarioAtenea",
+        "prefix": "Mr.",
+        "firstName": "Usuario",
+        "lastName": "Atenea",
+        "fullName": "Usuario Atenea",
+        "emailAddress": "UsuarioAtenea@gmail.com",
+        "password": "Test1234",
+        "DOB": {
+            "day": "10",
+            "month": "10",
+            "year": "1990"
+        },
+        "companyName": "AteneaCompany",
+        "address": "Atenea Address 1",
+        "address2": "Atenea Address 2",
+        "country": "Canada",
+        "state": "Quebec",
+        "city": "Montreal",
+        "zipCode": "123",
+        "phoneNumber": "1234567890"
+    },
+    "paymentDetails": {
+        "cardName": "John Doe",
+        "cardNumber": "1234567890",
+        "cvc": "123",
+        "expirationMonth": "11",
+        "expirationYear": "2030"
+    }
+
+}
