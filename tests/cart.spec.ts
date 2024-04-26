@@ -110,6 +110,6 @@ test('C16 - crear orden: Login antes el checkout', async ({ page }) => {
 test('C17 - crear orden: Login antes el checkout', async ({ page }) => {
   await productsPage.addItemsToCart(1);
   await utils.checkUrlContains('view_cart')
-  await page.locator('tr[id^="product-"] .cart_quantity_delete').click()
+  await viewCartPage.deleteItemButton.click();
   await utils.checkTextIsVisible('Cart is empty!');
 })

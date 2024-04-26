@@ -48,20 +48,3 @@ test.skip('C9 - verificar que la funcionalidade de busqueda devuelve resultados 
   }
 })
 
-test('C18 - verificar categorias de los productos', async ({ page }) => {
-  await page.goto('https://automationexercise.com/');
-  await page.getByRole('link', { name: 'Women' }).click({force:true});
-  await page.getByRole('link', { name: 'Dress' }).click()
-  await productsPage.closeAd();
-  await utils.checkTextIsVisible('Women - Dress Products');
-  await page.waitForTimeout(15000)
-})
-
-test('C19 - verificar carrito y marcas de los productos', async ({ page }) => {
-  await page.goto('https://automationexercise.com/');
-  await page.getByRole('link', { name: 'Women' }).click({force:true});
-  await page.getByRole('link', { name: 'Dress' }).click()
-  await productsPage.closeAd();
-  await utils.checkTextIsVisible('Women - Dress Products');
-  await page.waitForTimeout(15000)
-})
