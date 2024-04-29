@@ -113,3 +113,20 @@ test('C17 - crear orden: Login antes el checkout', async ({ page }) => {
   await viewCartPage.deleteItemButton.click();
   await utils.checkTextIsVisible('Cart is empty!');
 })
+
+
+test('C20 - Buscar productos y ver el carrito despues',async ({page})=>{
+  await productsPage.searchForProduct("Polo");
+  await utils.checkUrlContains('products?search=Polo');
+  await utils.checkTextIsVisible('Searched Products');
+  await productsPage.checkResultsContain('Polo')
+  await productsPage.addAllItemsToCart()
+  await homepage.cartButton.click()
+  await viewCartPage.checkProductTitleContains('Polo')
+  await homepage.goToLoginAndSignUpPage()
+  await signUpLoginPage.login(testData.usuarioCreado.emailAddress, testData.usuarioCreado.password);
+  await homepage.checkUsername(testData.usuarioCreado.userName);
+  await homepage.cartButton.click()
+  await viewCartPage.checkProductTitleContains('Polo')
+  await page.waitForTimeout(10000)
+})

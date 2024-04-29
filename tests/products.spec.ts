@@ -32,33 +32,19 @@ test('C8 - Verificar todos los productos y la pagina de detalles de productos', 
 })
 
 test.skip('C9 - verificar que la funcionalidade de busqueda devuelve resultados esperados', async ({ page }) => {
-  await productsPage.searchInputField.fill("Top");
-  await productsPage.submitSearch.click();
-  await page.waitForLoadState();
+  await productsPage.searchForProduct("Top");
   await utils.checkUrlContains('products?search=Top');
-
-  // Obetner la cantidad de resultados basandonos en su titulo
-  const count = await productsPage.productTitle.count();
-
-  // ver que tenemos por lo menos un resultado
-  expect(count).toBeGreaterThan(0);
-
-  // Verificar que todos los titulos contengan la palabra "Top"
-  for (let i = 0; i < count; i++) {
-    const text = await productsPage.productTitle.nth(i).textContent();
-    console.log("El titulo del producto es: ", text)
-    expect(text).toContain('Top')
-  }
+  productsPage.checkResultsContain('top')
 })
 
-test('C18 - verificar categorias de los productos',async ({page})=>{
+test('C18 - verificar categorias de los productos',async ()=>{
   await homePage.womenCategoryLink.click({force:true})
   await homePage.dressCategoryLink.click()
   await productsPage.closeAd()
   await utils.checkTextIsVisible('Women - dress Products');
 })
 
-test('C19 - Ver carrito y marcas de productos',async ({page})=>{
+test('C19 - Ver carrito y marcas de productos',async ()=>{
   await homePage.filterByBrand('POLO');
   await productsPage.closeAd()
   await utils.checkUrlContains('Polo')
