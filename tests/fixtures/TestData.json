@@ -49,6 +49,10 @@
         "cvc": "123",
         "expirationMonth": "11",
         "expirationYear": "2030"
+    },
+    "reviewInfo": {
+        "name": "Atenea",
+        "email": "usuarioAtenea@gmail.com",
+        "message": "This is a review"
     }
-
 }

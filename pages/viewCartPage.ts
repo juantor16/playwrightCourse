@@ -7,6 +7,10 @@ export default class ViewCartPage {
     readonly proceedToCheckoutButton: Locator;
     readonly signUpAndLoginCheckoutModalLink: Locator;
     readonly deleteItemButton: Locator;
+    readonly reviewNameInput: Locator;
+    readonly reviewEmailInput: Locator;
+    readonly reviewMessageInput: Locator;
+    readonly buttonReview: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -14,6 +18,10 @@ export default class ViewCartPage {
         this.proceedToCheckoutButton = page.getByText('Proceed To Checkout');
         this.signUpAndLoginCheckoutModalLink = page.getByRole('link', { name: 'Register / Login' });
         this.deleteItemButton = this.productRow.locator('.cart_quantity_delete');
+        this.reviewNameInput = page.locator('#name');
+        this.reviewEmailInput = page.locator('#email');
+        this.reviewMessageInput = page.locator('#review');
+        this.buttonReview = page.locator('#button-review')
     }
 
     async getProductDetails(amount: number) {
@@ -32,5 +40,12 @@ export default class ViewCartPage {
             let currentRow = this.productRow.nth(i)
             await expect(currentRow.locator('.cart_description')).toContainText(contains)
         }
+    }
+
+    async submitAreview(reviewInfo: any){
+        await this.reviewNameInput.fill(reviewInfo.name);
+        await this.reviewEmailInput.fill(reviewInfo.email)
+        await this.reviewMessageInput.fill(reviewInfo.message);
+        await this.buttonReview.click()
     }
 }
