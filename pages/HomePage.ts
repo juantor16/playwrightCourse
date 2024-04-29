@@ -14,6 +14,8 @@ export default class HomePage {
     readonly womenCategoryLink: Locator;
     readonly dressCategoryLink: Locator;
     readonly brandLink: Locator;
+    readonly recommendedSection: Locator;
+    readonly recommendedProductListTitles: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -28,6 +30,8 @@ export default class HomePage {
         this.womenCategoryLink = page.getByRole('link',{name: 'Women'});
         this.dressCategoryLink = page.getByRole('link',{name: 'Dress'});
         this.brandLink = page.locator('.brands-name a');
+        this.recommendedSection = page.locator('.recommended_items');
+        this.recommendedProductListTitles = page.locator('.recommended_items .item.active p')
     }
 
     async visit() {

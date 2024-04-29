@@ -140,3 +140,14 @@ test('C21 - Buscar productos y veririficar el carrito despues de loguearse',asyn
   await viewCartPage.submitAreview(testData.reviewInfo);
   await utils.checkTextIsVisible('Thank you for your review');
 })
+
+test('C22 - Agregar productos de seccion de recomendados',async ({page})=>{
+  await homepage.visit()
+  await homepage.recommendedSection.scrollIntoViewIfNeeded();
+  let productName;
+  productName = await homepage.recommendedProductListTitles.first().textContent()
+  await homepage.recommendedProductListTitles.first().click()
+  await homepage.recommendedSection.locator('.item.active .fa-shopping-cart').first().click()
+  await productsPage.viewCartModalButton.click()
+  await viewCartPage.checkProductTitleContains(productName)
+})
