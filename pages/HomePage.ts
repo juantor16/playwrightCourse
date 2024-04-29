@@ -13,6 +13,7 @@ export default class HomePage {
     readonly cartButton: Locator;
     readonly womenCategoryLink: Locator;
     readonly dressCategoryLink: Locator;
+    readonly brandLink: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -26,7 +27,7 @@ export default class HomePage {
         this.cartButton = page.getByRole('link', { name: 'Cart' })
         this.womenCategoryLink = page.getByRole('link',{name: 'Women'});
         this.dressCategoryLink = page.getByRole('link',{name: 'Dress'});
-
+        this.brandLink = page.locator('.brands-name a');
     }
 
     async visit() {
@@ -51,6 +52,10 @@ export default class HomePage {
     async goToContactUsPage() {
         await this.contactUsButton.click()
         expect(this.page.url()).toContain('contact_us')
+    }
+
+    async filterByBrand(brand: string){
+        await this.brandLink.filter({ hasText: brand }).click()
     }
 
 }

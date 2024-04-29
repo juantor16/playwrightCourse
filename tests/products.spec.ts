@@ -57,3 +57,13 @@ test('C18 - verificar categorias de los productos',async ({page})=>{
   await productsPage.closeAd()
   await utils.checkTextIsVisible('Women - dress Products');
 })
+
+test('C19 - Ver carrito y marcas de productos',async ({page})=>{
+  await homePage.filterByBrand('POLO');
+  await productsPage.closeAd()
+  await utils.checkUrlContains('Polo')
+  await homePage.filterByBrand('MADAME');
+  await productsPage.closeAd()
+  await utils.checkUrlContains('Madame')
+  await expect(await productsPage.productResultList.count()).toBeGreaterThan(0);
+})
