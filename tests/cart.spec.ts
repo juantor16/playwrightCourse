@@ -128,5 +128,15 @@ test('C20 - Buscar productos y ver el carrito despues',async ({page})=>{
   await homepage.checkUsername(testData.usuarioCreado.userName);
   await homepage.cartButton.click()
   await viewCartPage.checkProductTitleContains('Polo')
-  await page.waitForTimeout(10000)
+})
+
+test('C21 - Buscar productos y veririficar el carrito despues de loguearse',async ({page})=>{
+  expect((await productsPage.productResultList.all()).length).toBeGreaterThan(0);
+  await productsPage.productResultList.first().locator('a[href^="/product_details/"]').click()
+  await page.waitForLoadState();
+  await productsPage.closeAd();
+  await utils.checkUrlContains('product_details');
+  await utils.checkTextIsVisible('Write Your Review');
+  await viewCartPage.submitAreview(testData.reviewInfo);
+  await utils.checkTextIsVisible('Thank you for your review');
 })
