@@ -16,13 +16,21 @@ export default class ViewCartPage {
         this.deleteItemButton = this.productRow.locator('.cart_quantity_delete');
     }
 
-    async getProductDetails(amount:number){
+    async getProductDetails(amount: number) {
         for (let i = 1; i <= amount; i++) {
             const productRow = this.page.locator('tr[id^="product-' + i + '"]')
             await expect(productRow.locator('.cart_description')).toBeVisible()
             await expect(productRow.locator('.cart_price')).toBeVisible()
             await expect(productRow.locator('.cart_quantity')).toBeVisible()
             await expect(productRow.locator('.cart_total')).toBeVisible()
-          }
+        }
+    }
+
+    async checkProductTitleContains(contains: string) {
+        let amountOfRows = await this.productRow.count()
+        for (let i = 0; i < amountOfRows; i++) {
+            let currentRow = this.productRow.nth(i)
+            await expect(currentRow.locator('.cart_description')).toContainText(contains)
+        }
     }
 }

@@ -59,4 +59,30 @@ export default class ProductsPage {
             }
         }
     }
+
+    async searchForProduct(searchWord: string) {
+        await this.searchInputField.fill(searchWord);
+        await this.submitSearch.click();
+        await this.page.waitForLoadState();
+    }
+
+    async checkResultsContain(resultWord: string) {
+        // Obetner la cantidad de resultados basandonos en su titulo
+        const count = await this.productTitle.count();
+
+        // ver que tenemos por lo menos un resultado
+        expect(count).toBeGreaterThan(0);
+
+        // Verificar que todos los titulos contengan la palabra "Top"
+        for (let i = 0; i < count; i++) {
+            const text = await this.productTitle.nth(i).textContent();
+            console.log("El titulo del producto es: ", text)
+            expect(text).toContain(resultWord)
+        }
+    }
+
+    async addAllItemsToCart() {
+        let amountOfItemsFound = await this.productTitle.count();
+        await this.addItemsToCart(amountOfItemsFound)
+    }
 }
