@@ -51,3 +51,10 @@ test('C25 - Ir hacia arriba con la flecha', async () => {
   await homePage.scrollUpArrowLink.click()
   await utils.checkTextIsVisible('Full-Fledged practice website for Automation Engineers');
 })
+
+test('C26 - Ir hacia arriba y hacia abajo en la pagina', async ({page}) => {
+  await utils.scrollTo("bottom")
+  await expect(homePage.subscriptionEmailButton).toBeInViewport();
+  await utils.scrollTo("top")
+  await expect(page.getByText('Full-Fledged practice website for Automation Engineers').first()).toBeInViewport()
+})
