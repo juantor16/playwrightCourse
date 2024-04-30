@@ -67,11 +67,7 @@ test('C14 - crear orden: Registro durante el checkout', async ({ page }) => {
   await productsPage.closeAd()
   await paymentPage.completePayment(testData.paymentDetails);
   await utils.checkTextIsVisible('Congratulations! Your order has been confirmed!')
-  await homepage.deleteAccountButton.click();
-  await expect(page.getByText('Account Deleted!')).toBeVisible();
-  await deleteAccountPage.continueButton.click();
-  await page.waitForLoadState();
-  expect(page.url()).toBe('https://automationexercise.com/');
+  await homepage.deleteAccount();
 })
 
 test('C15 - crear orden: Registro antes el checkout', async ({ page }) => {
@@ -85,11 +81,7 @@ test('C15 - crear orden: Registro antes el checkout', async ({ page }) => {
   await productsPage.closeAd()
   await paymentPage.completePayment(testData.paymentDetails);
   await utils.checkTextIsVisible('Congratulations! Your order has been confirmed!')
-  await homepage.deleteAccountButton.click();
-  await expect(page.getByText('Account Deleted!')).toBeVisible();
-  await deleteAccountPage.continueButton.click();
-  await page.waitForLoadState();
-  expect(page.url()).toBe('https://automationexercise.com/');
+  await homepage.deleteAccount();
 })
 
 test('C16 - crear orden: Login antes el checkout', async ({ page }) => {
