@@ -10,6 +10,7 @@ import CheckoutPage from '../pages/checkoutPage';
 import PaymentPage from '../pages/PaymentPage'
 import DeleteAccountPage from '../pages/DeleteAccountPage';
 import SignUpLoginPage from '../pages/SignUpLoginPage';
+import PaymentDonePage from '../pages/PaymentDonePage';
 
 let utils: Utils;
 let productsPage: ProductsPage;
@@ -21,6 +22,7 @@ let checkoutPage: CheckoutPage;
 let paymentPage: PaymentPage;
 let deleteAccountPage: DeleteAccountPage;
 let signUpLoginPage: SignUpLoginPage;
+let paymentDonePage: PaymentDonePage;
 
 test.beforeEach(async ({ page }) => {
   utils = new Utils(page);
@@ -33,6 +35,7 @@ test.beforeEach(async ({ page }) => {
   paymentPage = new PaymentPage(page);
   deleteAccountPage = new DeleteAccountPage(page);
   signUpLoginPage = new SignUpLoginPage(page);
+  paymentDonePage = new PaymentDonePage(page);
   await productsPage.visit();
 });
 
@@ -45,4 +48,20 @@ test('C23 - Verificar detalles de direccion en la checkout page', async ({ page 
   await checkoutPage.checkDeliveryDetails(testData.usuarioNuevo);
   await checkoutPage.checkBillingDetails(testData.usuarioNuevo)
   await homepage.deleteAccount();
+})
+
+test('C24 - Descargar recibo despues de hacer la compra', async ({ page }) => {
+  await productsPage.addItemsToCart(1);
+  await viewCartPage.proceedToCheckoutButton.click();
+  await viewCartPage.signUpAndLoginCheckoutModalLink.click();
+  await signUpPage.completeSignUp(testData.usuarioNuevo);
+  await homepage.cartButton.click()
+  await viewCartPage.proceedToCheckoutButton.click();
+  await checkoutPage.checkDeliveryDetails(testData.usuarioNuevo);
+  await checkoutPage.checkBillingDetails(testData.usuarioNuevo)
+  await checkoutPage.placeOrderButton.click();
+  await productsPage.closeAd()
+  await paymentPage.completePayment(testData.paymentDetails);
+  await utils.checkTextIsVisible('Congratulations! Your order has been confirmed!')
+  await paymentDonePage.downloadInvoice();
 })
