@@ -31,17 +31,23 @@ test('C6 - Formulario de contacto', async ({ page }) => {
 
 test('C10 - verificar suscripcion en la pagina de inicio', async ({ page }) => {
   await page.goto('http://automationexercise.com');
-  await expect(page.locator('#susbscribe_email')).toBeVisible();
-  await page.locator('#susbscribe_email').fill('SomeTestq@email.com');
-  await page.locator('#subscribe').click();
+  await expect(homePage.subscriptionEmailInput).toBeVisible();
+  await homePage.subscriptionEmailInput.fill('SomeTestq@email.com');
+  await homePage.subscriptionEmailButton.click();
   await utils.checkTextIsVisible('You have been successfully subscribed!');
 })
 
 
 test('C11 - verificar suscripcion en la pagina de cart', async ({ page }) => {
   await page.goto('https://automationexercise.com/view_cart');
-  await expect(page.locator('#susbscribe_email')).toBeVisible();
-  await page.locator('#susbscribe_email').fill('SomeTestq@email.com');
-  await page.locator('#subscribe').click();
+  await expect(homePage.subscriptionEmailInput).toBeVisible();
+  await homePage.subscriptionEmailInput.fill('SomeTestq@email.com');
+  await homePage.subscriptionEmailButton.click();
   await utils.checkTextIsVisible('You have been successfully subscribed!');
+})
+
+test('C25 - Ir hacia arriba con la flecha', async () => {
+  await homePage.subscriptionEmailInput.scrollIntoViewIfNeeded()
+  await homePage.scrollUpArrowLink.click()
+  await utils.checkTextIsVisible('Full-Fledged practice website for Automation Engineers');
 })

@@ -18,6 +18,9 @@ export default class HomePage {
     readonly brandLink: Locator;
     readonly recommendedSection: Locator;
     readonly recommendedProductListTitles: Locator;
+    readonly subscriptionEmailInput: Locator;
+    readonly subscriptionEmailButton: Locator;
+    readonly scrollUpArrowLink: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -30,11 +33,14 @@ export default class HomePage {
         this.contactUsButton = page.getByRole('link', { name: 'Contact us' })
         this.productsButton = page.getByRole('link', { name: 'Products' })
         this.cartButton = page.getByRole('link', { name: 'Cart' })
-        this.womenCategoryLink = page.getByRole('link',{name: 'Women'});
-        this.dressCategoryLink = page.getByRole('link',{name: 'Dress'});
+        this.womenCategoryLink = page.getByRole('link', { name: 'Women' });
+        this.dressCategoryLink = page.getByRole('link', { name: 'Dress' });
         this.brandLink = page.locator('.brands-name a');
         this.recommendedSection = page.locator('.recommended_items');
         this.recommendedProductListTitles = page.locator('.recommended_items .item.active p')
+        this.subscriptionEmailInput = page.locator('#susbscribe_email')
+        this.subscriptionEmailButton = page.locator('#subscribe')
+        this.scrollUpArrowLink = page.locator('#scrollUp')
     }
 
     async visit() {
@@ -61,11 +67,11 @@ export default class HomePage {
         expect(this.page.url()).toContain('contact_us')
     }
 
-    async filterByBrand(brand: string){
+    async filterByBrand(brand: string) {
         await this.brandLink.filter({ hasText: brand }).click()
     }
 
-    async deleteAccount(){
+    async deleteAccount() {
         await this.deleteAccountButton.click();
         await expect(this.page.getByText('Account Deleted!')).toBeVisible();
         await this.deleteAccountPage.continueButton.click();
