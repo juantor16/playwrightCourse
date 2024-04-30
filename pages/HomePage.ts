@@ -1,8 +1,10 @@
 import { Page, Locator, expect } from "@playwright/test"
+import DeleteAccountPage from "./DeleteAccountPage";
 
 export default class HomePage {
 
     readonly page: Page;
+    readonly deleteAccountPage: DeleteAccountPage;
     readonly signUpAndLoginButton: Locator;
     readonly signUpHeader: Locator;
     readonly deleteAccountButton: Locator;
@@ -19,6 +21,7 @@ export default class HomePage {
 
     constructor(page: Page) {
         this.page = page;
+        this.deleteAccountPage = new DeleteAccountPage(page);
         this.signUpAndLoginButton = page.getByRole('link', { name: 'Signup / Login' });
         this.signUpHeader = page.getByRole('heading', { name: 'New User Signup!' });
         this.deleteAccountButton = page.getByRole('link', { name: 'Delete Account' });
@@ -60,6 +63,14 @@ export default class HomePage {
 
     async filterByBrand(brand: string){
         await this.brandLink.filter({ hasText: brand }).click()
+    }
+
+    async deleteAccount(){
+        await this.deleteAccountButton.click();
+        await expect(this.page.getByText('Account Deleted!')).toBeVisible();
+        await this.deleteAccountPage.continueButton.click();
+        await this.page.waitForLoadState();
+        expect(this.page.url()).toBe('https://automationexercise.com/');
     }
 
 }

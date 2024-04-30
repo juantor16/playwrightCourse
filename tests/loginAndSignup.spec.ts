@@ -28,11 +28,7 @@ test.beforeEach( async ({page}) => {
 test('C1 - Registro de Usuario', async ({ page }) => {
   await expect(homepage.signUpHeader).toBeVisible();
   await signUpPage.completeSignUp(testData.usuarioNuevo);
-  await homepage.deleteAccountButton.click();
-  await expect(page.getByText('Account Deleted!')).toBeVisible();
-  await deleteAccountPage.continueButton.click();
-  await page.waitForLoadState();
-  expect(page.url()).toBe('https://automationexercise.com/');
+  await homepage.deleteAccount();
 });
 
 test('C2 - Inicio de Sesión de Usuario con correo electrónico y contraseña correctos', async ({ page }) => {
