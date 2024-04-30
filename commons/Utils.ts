@@ -17,4 +17,13 @@ export default class Utils {
     async checkUrlContains(text: string) {
         expect(this.page.url()).toContain(text);
     }
+
+    async scrollTo(direction: string) {
+        if (direction == "top") {
+            await this.page.evaluate(() => window.scrollTo(0, 0));
+        } else {
+            await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight-1000));
+        }
+        await this.page.waitForTimeout(1000)
+    }
 }
